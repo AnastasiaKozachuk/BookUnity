@@ -38,16 +38,19 @@ public class BookApiServiceImpl extends BookApiService {
     public Response addBook(Book body, SecurityContext securityContext) throws NotFoundException {
     	CategoryDAO categoryDAO = new CategoryDAOImpl();
     	Category category = categoryDAO.getOneByName(body.getCategory());
+    	ConditionDAO conditionDAO = new ConditionDAOImpl();
+    	ua.bookUnity.model.Condition condition = conditionDAO.getOneByName(body.getCondition());
     	BookDAO bookDAO = new BookDAOImpl();
-    	ua.bookUnity.model.Book book = bookDAO.save(body.getName(), body.getAuthor(), body.getLanguage(), body.getYearOfIssue(), body.getPublishingHouse(), body.getDescription(), body.getNumberOfPages(), body.getPrice(), body.getOwnImpression(),body.getLogin() , body.getCondition().getId(),  category.getCategoryID());
+    	ua.bookUnity.model.Book book = bookDAO.save(body.getName(), body.getAuthor(), body.getLanguage(), body.getYearOfIssue(), body.getPublishingHouse(), body.getDescription(), body.getNumberOfPages(), body.getPrice(), body.getOwnImpression(),body.getLogin() , condition.getConditionID(),  category.getCategoryID());
     	
     	BookGenreDAO bookGenreDAO = new BookGenreDAOImpl();
     	SubcategoryDAO subcatDAO = new SubcategoryDAOImpl();
-    	
+    	GenreDAO genreDAO = new GenreDAOImpl();
     	
     	for(Genre gen: body.getGenre()) {	
     		ua.bookUnity.model.Subcategory subcat = subcatDAO.getOneByName(gen.getName());
-    		bookGenreDAO.save(book.getBookID(), gen.getId().intValue(),subcat.getSubcategoryID());
+    		ua.bookUnity.model.Genre genre = genreDAO.getOneByName(gen.getName());
+    		bookGenreDAO.save(book.getBookID(), genre.getGenreID(),subcat.getSubcategoryID());
     	}
     	
     	if(book!=null) {
@@ -101,8 +104,9 @@ public class BookApiServiceImpl extends BookApiService {
     			resultList.add(normalBook);
     		}
     	}
-    	
-        return Response.ok(resultList,MediaType.APPLICATION_JSON).build();
+    	List<Book> resultListEx = new LinkedList<>();
+    	resultListEx.add(exampleAdd());
+        return Response.ok(resultListEx,MediaType.APPLICATION_JSON).build();
     }
     @Override
     public Response getBookById(Long bookId, SecurityContext securityContext) throws NotFoundException {
@@ -119,8 +123,10 @@ public class BookApiServiceImpl extends BookApiService {
         
     	CategoryDAO categoryDAO = new CategoryDAOImpl();
     	Category category = categoryDAO.getOneByName(body.getCategory());
+    	ConditionDAO conditionDAO = new ConditionDAOImpl();
+    	ua.bookUnity.model.Condition condition = conditionDAO.getOneByName(body.getCondition());
     	BookDAO bookDAO = new BookDAOImpl();
-    	ua.bookUnity.model.Book book = bookDAO.update(body.getId().intValue(),body.getName(), body.getAuthor(), body.getLanguage(), body.getYearOfIssue(), body.getPublishingHouse(), body.getDescription(), body.getNumberOfPages(), body.getPrice(), body.getOwnImpression(),body.getLogin() , body.getCondition().getId(),  category.getCategoryID());
+    	ua.bookUnity.model.Book book = bookDAO.update(body.getId().intValue(),body.getName(), body.getAuthor(), body.getLanguage(), body.getYearOfIssue(), body.getPublishingHouse(), body.getDescription(), body.getNumberOfPages(), body.getPrice(), body.getOwnImpression(),body.getLogin() , condition.getConditionID(),  category.getCategoryID());
        
     	if(book!=null) {
        	 return Response.ok().entity(new ApiResponseMessage(ApiResponseMessage.OK, "Book is updated!!!")).build();
@@ -157,7 +163,19 @@ public class BookApiServiceImpl extends BookApiService {
      	
      	return Response.ok(resultList,MediaType.APPLICATION_JSON).build();
     }
-    
+    private Book exampleAdd() {
+    	Book result = new Book();
+    	result.setAuthor("Author1");
+    	result.setName("Book1");
+    	result.setLanguage("Language1");
+    	result.setYearOfIssue(1999);
+    	result.setPublishingHouse("house1");
+    	result.setDescription("fun book");
+    	result.setNumberOfPages(78);
+    	result.setPrice("$12");
+    	result.setOwnImpression("Cool book");
+    	return result;
+    }
     
     private Book normalizeBook(ua.bookUnity.model.Book book) {
     	Book result = new Book();
@@ -181,11 +199,8 @@ public class BookApiServiceImpl extends BookApiService {
     	ConditionDAO conditionDAO = new ConditionDAOImpl();
     	ua.bookUnity.model.Condition condition = conditionDAO.getOneByID(book.getCondition_fk());
     	
-    	Condition cond = new Condition();
-    	cond.setId(condition.getConditionID());
-    	cond.setName(condition.getConditionName());
+    	result.setCondition(condition.getConditionName());
     	
-    	result.setCondition(cond);
     	
     	return result;
     }

@@ -62,7 +62,7 @@ public class Book   {
   private String ownImpression = null;
 
   @JsonProperty("condition")
-  private Condition condition = null;
+  private String condition = null;
 
   @JsonProperty("genre")
   private List<Genre> genre = null;
@@ -326,7 +326,7 @@ public class Book   {
     this.ownImpression = ownImpression;
   }
 
-  public Book condition(Condition condition) {
+  public Book condition(String condition) {
     this.condition = condition;
     return this;
   }
@@ -338,11 +338,11 @@ public class Book   {
   @JsonProperty("condition")
   @ApiModelProperty(required = true, value = "")
   @NotNull
-  public Condition getCondition() {
+  public String getCondition() {
     return condition;
   }
 
-  public void setCondition(Condition condition) {
+  public void setCondition(String condition) {
     this.condition = condition;
   }
 
