@@ -82,9 +82,10 @@ var booksExample = [
 
 angular.module('bookUnity')
   .controller('SetCtrl', ['$scope','$rootScope', '$http', function ($scope, $rootScope ,$http) {
-      $scope.user = Object.assign({},$rootScope.user);
+      $scope.user = Object.assign({},$rootScope.user);   
       $scope.done = function () {
-          $http.post('/v2/account', { params: $scope.user },
+          $http.post('/v2/account', JSON.stringify($scope.user))
+          .then(
             function (response) { console.log("success");},
             function (failure) { console.log("failed :(", failure); });
       }
@@ -119,12 +120,19 @@ angular.module('bookUnity')
 
 angular.module('bookUnity')
 .controller('ShowCtrl',['$scope','$rootScope','$http',function ($scope,$rootScope, $http) {
-        $http.get('/v2/book/showBooks', { params:{ login: $rootScope.user.login }},
+        $http.get('/v2/book/showBooks', { params:{ login: $rootScope.currentUser }},
           function (response) { 
         	 $scope.books = response.data;
         },
           function (failure) { console.log("failed :(", failure); });
  //      $scope.books = booksExample;
+}]); 
+
+angular.module('bookUnity')
+.controller('LoginCtrl',['$scope','$rootScope','$http',function ($scope,$rootScope, $http) {	
+        $scope.login = function() {
+        	$rootScope.currentUser = $scope.login;
+        };
 }]); 
 
 
@@ -149,7 +157,7 @@ angular.module('bookUnity')
                '</div>'+
                '<div>'+
                     '<span class="name">Year: </span>'+
-                    '<span class="ex">{{item.year}}</span>'+
+                    '<span class="ex">{{item.yearOfIssue}}</span>'+
                '</div>'+
                '<div>'+
                     '<span class="name">Publishing house: </span>'+
@@ -161,7 +169,7 @@ angular.module('bookUnity')
                '</div>'+
                '<div>'+
                     '<span class="name">Number of Pages: </span>'+
-                    '<span class="ex">{{item.numPages}}</span>'+
+                    '<span class="ex">{{item.numberOfPages}}</span>'+
                '</div>'+
                '<div>'+
                     '<span class="name">Price: </span>'+

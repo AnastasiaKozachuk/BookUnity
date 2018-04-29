@@ -1,4 +1,4 @@
-<div class="signin"></div>
+<div class="signin" ng-controller="LoginCtrl"></div>
     <div class="my-book-sign">
         <div class="row book-container" >
             <div class="links" id="forget-me-not">
@@ -6,10 +6,10 @@
                 <div class="thumbnail test-card">
                     <form action="">
                         User name:<br>
-                        <input type="text" name="userid" value="Username" class="input-join">
+                        <input type="text" name="userid" ng-model="login" value="Username" class="input-join">
                         User password:<br>
-                        <input type="password" name="psw" class="input-join">
-                        <a class="watch" href='#/dashboard'>Sign in</a>
+                        <input type="password" name="psw" ng-model="password" class="input-join">
+                        <a class="watch" ng-click="login()" href='#/dashboard'>Sign in</a>
                         <div class="noaccount">
                             <div class="name2">
                                 <a href='#/signup' class="name2">Don't have an account</a>

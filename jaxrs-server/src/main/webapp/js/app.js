@@ -1,4 +1,3 @@
-signedin = false;
 var app = angular.module('bookUnity',
     ['ngRoute']).
     config(function ($locationProvider,$routeProvider) {
@@ -52,10 +51,11 @@ var app = angular.module('bookUnity',
         });
 app.run(function($rootScope) {
 	$rootScope.user = {};
+	$rootScope.currentUser = "";
 });
 
-app.controller("MenuCtrl", function ($scope, $location, Menu, Menu2) {
-	if(signedin){
+app.controller("MenuCtrl", function ($scope,$rootScope, $location, Menu, Menu2) {
+	if($rootScope.currentUser){
 		$scope.menu = Menu2;
 	}else{
 	    $scope.menu = Menu;
