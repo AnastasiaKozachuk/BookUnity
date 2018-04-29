@@ -1,4 +1,4 @@
-signedin = false;
+signedin = true;
 var app = angular.module('bookUnity',
     ['ngRoute']).
     config(function ($locationProvider,$routeProvider) {
