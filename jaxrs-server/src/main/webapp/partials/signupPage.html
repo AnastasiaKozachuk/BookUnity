@@ -6,13 +6,13 @@
             <div class="thumbnail test-card">
                 <form action="">
                     Email:<br>
-                    <input type="text" name="userid" value="Username" class="input-join">
+                    <input type="text" ng-model="user.login" value="Username" class="input-join">
                     <br>
-                    Create a password:<br>
-                    <input type="password" name="psw" class="input-join">
+                    Create a password:<br> 
+                    <input type="password" ng-model="user.password" class="input-join">
                     Confirm password:<br>
                     <input type="password" name="psw" class="input-join">
-                    <div class="watch" onclick="location.href=#/setup'">Create</div>
+                    <a class="watch" href="#/setup">Create</a>
                 </form>
             </div>
         </div>
