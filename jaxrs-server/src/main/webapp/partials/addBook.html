@@ -4,24 +4,24 @@
             <h1 class="title-filter">New Book</h1>
         </div>
         <div class="book-container">
-            <div class="row">
-                <form action="">
+            <div class="row" ng-controller="AddBookCtrl" >
+                <form ng-submit="done()">
                     Title:<br>
-                    <input type="text" name="Title" value="Enter title" class="input-join">
+                    <input type="text" ng-model="book.name" value="Enter title" class="input-join">
                     Author:<br>
-                    <input type="text" name="author" value="Enter author" class="input-join">
+                    <input type="text" ng-model="book.author" value="Enter author" class="input-join">
                     Language:<br>
-                    <input type="text" name="language" value="Enter language" class="input-join">
+                    <input type="text" ng-model="book.language" value="Enter language" class="input-join">
                     Year of issue:<br>
-                    <input type="text" name="year" value="Enter year" class="input-join">
+                    <input type="text" ng-model="book.yearOfIssue" value="Enter year" class="input-join">
                     Publishing house:<br>
-                    <input type="text" name="publishing" value="Enter publishing house" class="input-join">
+                    <input type="text" ng-model="book.publishingHouse" value="Enter publishing house" class="input-join">
                     Description:<br>
-                    <input type="text" name="description" value="Enter description" class="input-join">
+                    <input type="text" ng-model="book.description" value="Enter description" class="input-join">
                     Number of pages:<br>
-                    <input type="text" name="pages" value="Enter number of pages" class="input-join">
+                    <input type="text" ng-model="book.numberOfPages" value="Enter number of pages" class="input-join">
                     Price:<br>
-                    <input type="text" name="price" value="Enter price" class="input-join">
+                    <input type="text" ng-model="book.price" value="Enter price" class="input-join">
                     Category:<br>
                     <input type="text" name="category" value="Enter category" class="input-join">
                     Condition:<br>
@@ -33,8 +33,8 @@
                     <input type="text" name="genre" value="Enter genre 4" class="input-join">
                     <input type="text" name="genre" value="Enter genre 5" class="input-join">
                     Own impression:<br>
-                    <input type="text" name="impression" value="Enter your impression of this book" class="input-join">
-                    <a class="watch" href='#/addBook'>Add</a>
+                    <input type="text" ng-model="book.impression" value="Enter your impression of this book" class="input-join">
+                    <input type="submit" class="watch" value="Add">
                 </form>
             </div>
         </div>

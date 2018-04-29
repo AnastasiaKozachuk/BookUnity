@@ -50,6 +50,9 @@ var app = angular.module('bookUnity',
                     redirectTo: '/'
                 });
         });
+app.run(function($rootScope) {
+	$rootScope.user = {};
+});
 
 app.controller("MenuCtrl", function ($scope, $location, Menu, Menu2) {
 	if(signedin){
