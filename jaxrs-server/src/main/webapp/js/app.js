@@ -1,3 +1,4 @@
+signedin = false;
 var app = angular.module('bookUnity',
     ['ngRoute']).
     config(function ($locationProvider,$routeProvider) {
@@ -50,10 +51,12 @@ var app = angular.module('bookUnity',
                 });
         });
 
-app.controller("MenuCtrl", function ($scope, $location, Menu) {
-
-    $scope.menu = Menu;
-
+app.controller("MenuCtrl", function ($scope, $location, Menu, Menu2) {
+	if(signedin){
+		$scope.menu = Menu2;
+	}else{
+	    $scope.menu = Menu;
+	}
 });
 
 app.directive("menu", function () {
@@ -67,8 +70,6 @@ app.directive("menu", function () {
 
 });
 
-
-
 app.factory('Menu', function () {
 
     var Menu = {};
@@ -77,7 +78,54 @@ app.factory('Menu', function () {
         {
             class: "join",
             href: "#/signin",
-            name: "JOIN"
+            name: "JOIN",
+
+        },
+
+        {
+            class: "menubutton",
+            href: "#/about",
+            name: "About",
+        },
+
+        {
+
+            class: "menubutton",
+            href: "#/search/#filters-search",
+            name: "Search"
+
+        },
+
+        {
+
+            class: "menubutton",
+            href: "#/catalog",
+            name: "Catalog"
+
+        },
+
+    ];
+
+    return Menu;
+
+});
+
+app.factory('Menu2', function () {
+
+    var Menu2 = {};
+
+    Menu2.items = [
+        {
+            class: "join",
+            href: "#/signin",
+            name: "LOG OUT"
+
+        },
+        {
+
+            class: "menubutton",
+            href: "#/dashboard",
+            name: "Profile"
 
         },
 
@@ -105,6 +153,6 @@ app.factory('Menu', function () {
 
     ];
 
-    return Menu;
+    return Menu2;
 
 });
