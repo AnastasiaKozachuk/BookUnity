@@ -120,17 +120,18 @@ angular.module('bookUnity')
 
 angular.module('bookUnity')
 .controller('ShowCtrl',['$scope','$rootScope','$http',function ($scope,$rootScope, $http) {
-        $http.get('/v2/book/showBooks', { params:{ login: $rootScope.currentUser }},
+ /*       $http.get('/v2/book/showBooks', { params:{ login: $rootScope.currentUser }},
           function (response) { 
         	 $scope.books = response.data;
         },
-          function (failure) { console.log("failed :(", failure); });
- //      $scope.books = booksExample;
+          function (failure) { console.log("failed :(", failure); });*/
+       $scope.books = booksExample;
 }]); 
 
 angular.module('bookUnity')
 .controller('LoginCtrl',['$scope','$rootScope','$http',function ($scope,$rootScope, $http) {	
-        $scope.login = function() {
+	$scope.login="";
+        $scope.login1 = function() {
         	$rootScope.currentUser = $scope.login;
         };
 }]); 
