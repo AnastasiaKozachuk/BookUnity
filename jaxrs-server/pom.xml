@@ -2,8 +2,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.swagger</groupId>
   <artifactId>swagger-jaxrs-server</artifactId>
-  <packaging>jar</packaging>
-  <name>swagger-jaxrs-server</name>
+  <packaging>war</packaging>
+  <name>BookUnity</name>
   <version>1.0.0</version>
 
   <licenses>
@@ -34,6 +34,31 @@
           </execution>
         </executions>
       </plugin>
+      
+      
+       <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-dependency-plugin</artifactId>
+      <version>2.4</version>
+      <executions>
+        <execution>
+          <phase>package</phase>
+          <goals><goal>copy</goal></goals>
+          <configuration>
+            <artifactItems>
+              <artifactItem>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-runner</artifactId>
+                <version>9.4.9.v20180320</version>
+                <destFileName>jetty-runner.jar</destFileName>
+              </artifactItem>
+            </artifactItems>
+          </configuration>
+        </execution>
+       </executions>
+    </plugin>
+      
+      
       <plugin>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
