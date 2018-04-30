@@ -55,7 +55,7 @@ app.run(function($rootScope) {
 });
 
 app.controller("MenuCtrl", function ($scope,$rootScope, $location, Menu, Menu2) {
-	if($rootScope.currentUser!=""){
+	if($rootScope.currentUser){
 		$scope.menu = Menu2;
 	}else{
 	    $scope.menu = Menu;

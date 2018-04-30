@@ -106,7 +106,7 @@ public class BookApiServiceImpl extends BookApiService {
     	}
     	List<Book> resultListEx = new LinkedList<>();
     	resultListEx.add(exampleAdd());
-        return Response.ok(resultListEx,MediaType.APPLICATION_JSON).build();
+        return Response.ok(resultList,MediaType.APPLICATION_JSON).build();
     }
     @Override
     public Response getBookById(Long bookId, SecurityContext securityContext) throws NotFoundException {
