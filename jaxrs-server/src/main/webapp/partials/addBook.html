@@ -45,4 +45,27 @@
         </div>
     </div>
     <a class="dashboard" href='#/dashboard'>Dashboard</a>
+    <div class="top-panel" ng-hide="signed">
+	    <div class="bottom-part-of-top-panel">
+	        <a class="btn btn-link link-home" href="/#!/index.html" >
+        		<img class="img succulent" src="/img/BookUnity.svg">
+        	</a>
+	        <a class="join" href="#/signin">JOIN</a>
+	        <a class="menubutton" href="#/about">About</a>
+	        <a class="menubutton" href="#/search/#filters-search">Search</a>
+	        <a class="menubutton" href="#/catalog">Catalog</a>
+	    </div>
+    </div>
+    <div class="top-panel" ng-show="signed">
+	    <div class="bottom-part-of-top-panel">
+	        <a class="btn btn-link link-home" href="/#!/index.html" >
+        		<img class="img succulent" src="/img/BookUnity.svg">
+        	</a>
+	        <a class="join" href="#/signin">LOG OUT</a>
+	        <a class="menubutton" href="#/dashboard">Profile</a>
+	        <a class="menubutton" href="#/about">About</a>
+	        <a class="menubutton" href="#/search/#filters-search">Search</a>
+	        <a class="menubutton" href="#/catalog">Catalog</a>
+	    </div>
+    </div>
 </div>

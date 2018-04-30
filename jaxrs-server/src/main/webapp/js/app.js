@@ -1,4 +1,3 @@
-signedin = true;
 var app = angular.module('bookUnity',
     ['ngRoute']).
     config(function ($locationProvider,$routeProvider) {
@@ -13,8 +12,8 @@ var app = angular.module('bookUnity',
                     //controller: 'AboutCtrl'
                 }).
                 when('/signin', {
-                    templateUrl: '/partials/signinPage.html'
-                    //controller: 'SigninCtrl'
+                    templateUrl: '/partials/signinPage.html',
+                    controller: 'signinCtrl',
                 }).
                 when('/signup', {
                     templateUrl: '/partials/signupPage.html'
@@ -25,8 +24,8 @@ var app = angular.module('bookUnity',
                     //controller: 'SetAccountCtrl'
                 }).
                 when('/dashboard', {
-                    templateUrl: '/partials/accountPage.html'
-                    //controller: 'DashboardCtrl'
+                    templateUrl: '/partials/accountPage.html',
+                    controller: 'DashboardCtrl',
                 }).
                 when('/myBooks', {
                     templateUrl: '/partials/myBooksPage.html'
@@ -52,13 +51,32 @@ var app = angular.module('bookUnity',
         });
 app.run(function($rootScope) {
 	$rootScope.user = {};
+	$rootScope.signed = false;
 });
 
-app.controller("MenuCtrl", function ($scope, $location, Menu, Menu2) {
-	if(signedin){
-		$scope.menu = Menu2;
+app.controller('DashboardCtrl', function ($rootScope, $scope,$timeout) {
+	$timeout(function(){
+		$rootScope.$apply(function(){
+		    $rootScope.signed = true;
+		    console.log("Signed in = " + $rootScope.signed);
+		});
+	});
+}); 
+
+app.controller('signinCtrl', function ($rootScope, $scope, $timeout) {
+	$timeout(function(){
+		$rootScope.$apply(function(){
+		    $rootScope.signed = false;
+		    console.log("Signed in = " + $rootScope.signed);
+		});
+	});
+}); 
+/*
+app.controller("MenuCtrl", function ($scope, $rootScope, $location, Menu, Menu2, myService) {
+	if (myService.getVal('signed') === 'false') {
+		$scope.menu = Menu;
 	}else{
-	    $scope.menu = Menu;
+		$scope.menu = Menu2;
 	}
 });
 
@@ -71,6 +89,19 @@ app.directive("menu", function () {
         			'<a href="{{item.href}}" ng-repeat="item in menu.items" class="{{item.class}}">{{item.name}}</a>'
     }
 
+});
+
+app.factory('myService', function () {
+	var headInfo = [];
+	headInfo['signed'] = 'false';
+	return {
+	    updateVal: function (key, data) {
+	        headInfo[key] = data;
+	    },
+	    getVal: function (key) {
+	        return headInfo[key];
+	    }
+	}
 });
 
 app.factory('Menu', function () {
@@ -158,4 +189,4 @@ app.factory('Menu2', function () {
 
     return Menu2;
 
-});
+});*/
