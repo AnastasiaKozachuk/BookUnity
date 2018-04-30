@@ -25,8 +25,6 @@ import javax.validation.constraints.*;
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2018-04-24T18:42:49.417Z")
 public class Genre   {
-  @JsonProperty("id")
-  private Long id = null;
 
   @JsonProperty("name")
   private String name = null;
@@ -37,25 +35,6 @@ public class Genre   {
   @JsonProperty("description")
   private String description = null;
 
-  public Genre id(Long id) {
-    this.id = id;
-    return this;
-  }
-
-  /**
-   * Get id
-   * @return id
-   **/
-  @JsonProperty("id")
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
 
   public Genre name(String name) {
     this.name = name;
@@ -125,15 +104,14 @@ public class Genre   {
       return false;
     }
     Genre genre = (Genre) o;
-    return Objects.equals(this.id, genre.id) &&
-        Objects.equals(this.name, genre.name) &&
+    return Objects.equals(this.name, genre.name) &&
         Objects.equals(this.subCategoryName, genre.subCategoryName) &&
         Objects.equals(this.description, genre.description);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, subCategoryName, description);
+    return Objects.hash(name, subCategoryName, description);
   }
 
 
@@ -142,7 +120,6 @@ public class Genre   {
     StringBuilder sb = new StringBuilder();
     sb.append("class Genre {\n");
     
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    subCategoryName: ").append(toIndentedString(subCategoryName)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
