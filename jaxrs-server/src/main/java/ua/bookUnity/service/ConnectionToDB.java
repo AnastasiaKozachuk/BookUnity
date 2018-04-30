@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 
 public class ConnectionToDB {
 	
-	private static final String DBURL = "jdbc:postgresql://localhost:5432/bookUnity";
-	private static final String DBUser = "postgres";
-	private static final String DBUserPassword="22041999";
+	private static final String DBURL = "jdbc:postgresql://ec2-54-221-192-231.compute-1.amazonaws.com:543/des7vh4p4n0a61";
+	private static final String DBUser = "iltdwmexdojdjg";
+	private static final String DBUserPassword="805aa7df283082d2e0bec6c0cc420f2e36a5d5648505178e2375e4321ce0f318";
 	
 	
 	public static Connection getConnectionToDB() throws DAOException{
